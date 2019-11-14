@@ -1,4 +1,13 @@
 package com.rr.credstudio;
 
-public class StudioAPI {
+import com.rr.credstudio.Model.Studio;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+
+public interface StudioAPI {
+    @GET("studio")
+    Call<List <Studio>> getSongList();
 }
