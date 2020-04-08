@@ -1,5 +1,11 @@
-package com.rr.credstudio.Model;
+package com.rr.credstudio.model;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
 
 public class Studio {
@@ -42,5 +48,13 @@ public class Studio {
 
     public void setCover_image(String cover_image) {
         this.cover_image = cover_image;
+    }
+
+    @BindingAdapter("coverImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                /*.apply(new RequestOptions().circleCrop())*/
+                .into(view);
     }
 }

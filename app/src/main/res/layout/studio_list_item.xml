@@ -1,7 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="studio"
+            type="com.rr.credstudio.model.Studio" />
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="presenter"
+            type="com.rr.credstudio.ActivityPresenter" />
+
+        <variable
+            name="studioVM"
+            type="com.rr.credstudio.viewModel.ShareViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+
+        card_view:cardBackgroundColor="@color/colorWhite"
+        card_view:cardCornerRadius="10dp">
+        //android:onClick="@{()-> presenter.onItemClick(studio,position)}"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                card_view:coverImage="@{studio.cover_image}"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintHorizontal_weight="3"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintRight_toLeftOf="@id/song"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/song"
+                style="@style/SongText"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:text="@{studio.song}"
+
+                card_view:layout_constraintHorizontal_weight="6"
+                card_view:layout_constraintLeft_toRightOf="@+id/img"
+                card_view:layout_constraintRight_toLeftOf="@+id/txt_dwn"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/artist"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="top"
+                android:maxLines="1"
+                android:text="@{studio.artists}"
+                android:textSize="13sp"
+                card_view:layout_constraintHorizontal_weight="6"
+                card_view:layout_constraintLeft_toRightOf="@+id/img"
+                card_view:layout_constraintRight_toLeftOf="@+id/txt_dwn"
+                card_view:layout_constraintTop_toBottomOf="@+id/song" />
+
+            <Button
+                android:id="@+id/txt_dwn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->studioVM.onDownloadClick(studio,position)}"
+                android:text="Dwn"
+                card_view:layout_constraintHorizontal_weight="3"
+                card_view:layout_constraintLeft_toRightOf="@+id/song"
+                card_view:layout_constraintRight_toRightOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:gravity="center"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@id/artist" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

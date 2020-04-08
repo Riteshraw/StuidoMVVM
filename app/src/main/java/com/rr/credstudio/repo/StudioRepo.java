@@ -1,8 +1,8 @@
-package com.rr.credstudio.Repo;
+package com.rr.credstudio.repo;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.rr.credstudio.Model.Studio;
+import com.rr.credstudio.model.Studio;
 import com.rr.credstudio.RetrofitService;
 import com.rr.credstudio.StudioAPI;
 
@@ -38,10 +38,9 @@ public class StudioRepo {
             public void onResponse(Call<List<Studio>> call, Response<List<Studio>> response) {
                 if (response.isSuccessful()) {
                     studioList.postValue(response.body());
-                    int x =1;
                 //    studio.setValue(response.body());
                 }
-            }
+             }
 
             @Override
             public void onFailure(Call<List<Studio>> call, Throwable t) {

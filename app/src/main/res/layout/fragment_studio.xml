@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="studioFrag"
+            type="com.rr.credstudio.model.Studio" />
+
+        <variable
+            name="presenter"
+            type="com.rr.credstudio.FragmentPresenter" />
+
+        <variable
+            name="studioVMFrag"
+            type="com.rr.credstudio.viewModel.ShareViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/frag_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            app:coverImage="@{studioFrag.cover_image}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/song"
+            style="@style/SongText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:text="@{studioFrag.song}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_img" />
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{studioFrag.artists}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/song" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/frag_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="80dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:paddingStart="0dp"
+            android:progressBackgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/frag_img_play"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            android:onClick="@{()->presenter.onPlayClick(studioFrag)}"
+            android:src="@mipmap/play"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_seekbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/frag_img_prev"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="@{()->studioVMFrag.onPrevClick(studioFrag)}"
+            android:src="@mipmap/prev"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_img_play"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/frag_img_play" />
+
+        <ImageView
+            android:id="@+id/frag_img_next"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="@{()->studioVMFrag.onNextClick(studioFrag)}"
+            android:src="@mipmap/next"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_img_play"
+            app:layout_constraintLeft_toLeftOf="@+id/frag_img_play"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
