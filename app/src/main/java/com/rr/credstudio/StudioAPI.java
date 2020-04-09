@@ -14,5 +14,5 @@ public interface StudioAPI {
     Call<List <Studio>> getSongList();
 
     @GET
-    Call<ResponseBody> downloadFileWithDynamicUrlSync(@Url String fileUrl);
+    Call<ResponseBody> getSongDwn(@Url String fileUrl);
 }

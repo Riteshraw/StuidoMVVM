@@ -108,7 +108,7 @@ public class DownloadService extends Service {
     private void initDownload(String filename, String fileUrl, int id) {
 
         StudioAPI downloadService = RetrofitService.createService(StudioAPI.class);
-        Call<ResponseBody> call = downloadService.downloadFileWithDynamicUrlSync(fileUrl);
+        Call<ResponseBody> call = downloadService.getSongDwn(fileUrl);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -129,6 +129,7 @@ public class DownloadService extends Service {
                 Log.e(TAG, "error");
             }
         });
+
 
     }
 
@@ -182,98 +183,6 @@ public class DownloadService extends Service {
             return false;
         }
     }
-
-    /*private void downloadFile(ResponseBody body, String filename, int id) throws IOException {
-
-        int count;
-        byte data[] = new byte[1024 * 4];
-        long fileSize = body.contentLength();
-        InputStream bis = new BufferedInputStream(body.byteStream(), 1024 * 8);
-        File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
-        OutputStream output = new FileOutputStream(outputFile);
-        long total = 0;
-        long startTime = System.currentTimeMillis();
-        int timeCount = 1;
-        while ((count = bis.read(data)) != -1) {
-
-            total += count;
-            totalFileSize = (int) (fileSize / (Math.pow(1, 2))) / 1000;
-            double current = Math.round(total / (Math.pow(1, 2))) / 1000;
-
-            int progress = (int) ((total * 100) / fileSize);
-
-            long currentTime = System.currentTimeMillis() - startTime;
-
-            Download download = new Download();
-            download.setTotalFileSize(totalFileSize);
-
-            if (currentTime > 1000 * timeCount) {
-
-                download.setCurrentFileSize((int) current);
-                download.setProgress(progress);
-                sendNotification(download, id);
-                timeCount++;
-            }
-
-            output.write(data, 0, count);
-        }
-        onDownloadComplete(filename, id);
-        output.flush();
-        output.close();
-        bis.close();
-
-    }*/
-
-    /*private void sendNotification(Download download, int id) {
-
-        sendIntent(download, id);
-        notificationBuilder.setProgress(100, download.getProgress(), false)
-                .setContentTitle("Downloading");
-        notificationBuilder.setContentText("Downloading file " + download.getCurrentFileSize() + "/" + totalFileSize + " KB");
-        notificationManager.notify(id, notificationBuilder.build());
-    }
-
-    private void sendIntent(Download download, int id) {
-
-        Intent intent = new Intent(subject.MESSAGE_PROGRESS);
-        intent.putExtra("download", download);
-        LocalBroadcastManager.getInstance(DownloadService.this).sendBroadcast(intent);
-    }
-
-    private void onDownloadComplete(String filename, int id) {
-        try {
-
-            Download download = new Download();
-            download.setProgress(100);
-            sendIntent(download, id);
-
-            notificationManager.cancel(id);
-            notificationBuilder.setProgress(0, 0, false);
-            notificationBuilder.setContentText("Tap to open");
-            notificationManager.notify(id, notificationBuilder.build());
-
-            String path1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename;
-
-            File file = new File(path1);
-            Uri uri_path = Uri.fromFile(file);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension
-                    (MimeTypeMap.getFileExtensionFromUrl(path1));
-
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-            intent.setType(mimeType);
-            intent.setDataAndType(uri_path, mimeType);
-            PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-            String string = filename;
-            notificationBuilder
-                    .setContentIntent(pIntent)
-                    .setAutoCancel(true)
-                    .setContentTitle(string + " Downloaded");
-            Log.i("Paras", "onDownloadComplete: " + string);
-            notificationManager.notify(id, notificationBuilder.build());
-        } catch (Exception ex) {
-
-        }
-    }*/
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {

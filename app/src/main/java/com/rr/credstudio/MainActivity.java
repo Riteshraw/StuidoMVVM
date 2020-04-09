@@ -2,6 +2,7 @@ package com.rr.credstudio;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -58,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
         });
         binding.setStudioVM(shareViewModel);
         setupRecyclerView();
+
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                shareViewModel.dwnAll();
+            }
+        },5000);*/
     }
 
     private void setupRecyclerView() {

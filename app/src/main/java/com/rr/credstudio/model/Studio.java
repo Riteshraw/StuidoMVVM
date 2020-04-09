@@ -8,7 +8,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
 
-public class Studio {
+import java.io.Serializable;
+
+public class Studio implements Serializable {
     @SerializedName("song")
     String song;
     @SerializedName("url")
@@ -17,6 +19,7 @@ public class Studio {
     String artists;
     @SerializedName("cover_image")
     String cover_image;
+    int progress;
 
     public String getSong() {
         return song;
@@ -48,6 +51,14 @@ public class Studio {
 
     public void setCover_image(String cover_image) {
         this.cover_image = cover_image;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     @BindingAdapter("coverImage")
